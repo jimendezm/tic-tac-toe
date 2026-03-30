@@ -1,60 +1,55 @@
-# Minimax Tic-Tac-Toe
+# Semana 5 - Minimax (Tic Tac Toe)
 
-A Tic-Tac-Toe AI implementation using the Minimax algorithm. The AI plays optimally and will never lose.
+En esta semana se implementa el algoritmo **Minimax** aplicado al juego Tic Tac Toe.
 
-## Functions
+---
 
-### utils.py
+## Descripción
 
-- `is_free_to_mark(board, movement)` - Checks if a position is available
-- `players(board)` - Returns which player moves next (X or O)
-- `actions(board)` - Returns all available moves
-- `result(board, action)` - Returns the board after taking an action
-- `terminal(board)` - Checks if the game is over
-- `utility(board, player)` - Returns the score for a terminal state (+1 win, -1 loss, 0 draw)
+Minimax permite tomar decisiones óptimas en juegos de dos jugadores.
+La idea es que:
 
-### minimax.py
+* **X** intenta maximizar el resultado
+* **O (IA)** intenta minimizarlo
 
-- `min_value(board, player)` - Minimax function that minimizes the maximum value
-- `max_value(board, player)` - Minimax function that maximizes the minimum value
+El algoritmo evalúa todos los posibles movimientos y elige el mejor.
 
-## Installation
+Valores:
 
-Install the required dependencies:
+* `1` → gana X
+* `-1` → gana O
+* `0` → empate
 
-```bash
-pip install -r requirements.txt
+---
+
+## Interfaz
+
+Se hizo una interfaz con **Pygame** donde:
+
+* El usuario juega como **X**
+* La IA juega automáticamente como **O**
+* Se puede reiniciar la partida
+
+---
+
+## Archivos
+
+* `minimax.py`: lógica del algoritmo
+* `utils.py`: funciones auxiliares
+* `minimax_ui.py`: interfaz gráfica
+
+---
+
+## Cómo ejecutar
+
+Instalar pygame:
+
+```id="instminimax2"
+pip install pygame
 ```
 
-## Testing
+Ejecutar:
 
-Run all tests:
-
-```bash
-pytest
-```
-
-Run a specific test file:
-
-```bash
-pytest tests/test_utils.py
-pytest tests/test_minimax.py
-```
-
-Run a specific test function:
-
-```bash
-pytest tests/test_utils.py::test_function_name
-```
-
-Run tests matching a pattern:
-
-```bash
-pytest -k "test_name"
-```
-
-Run without coverage (faster):
-
-```bash
-pytest --no-cov
+```id="runminimax2"
+python minimax_ui.py
 ```
