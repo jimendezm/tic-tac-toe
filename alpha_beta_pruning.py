@@ -7,41 +7,68 @@ from utils import utility, terminal, result, actions, players, PLAYER_X
 
 
 def min_value(board, alpha, beta):
+    if(terminal(board)):
+        return utility(board)
+
+    v=math.inf
+    for action in actions(board):
+        beta = min(beta, v)
+        if alpha >= beta:
+            break
+        v= min(v,max_value(result(board,action),alpha,beta))
+    return v
     """
     Choose the action a in actions(s) that minimizes max - value(result(s, a))
     """
 
-    #     beta = min(beta, v)
-    #
-    #     if alpha >= beta:
-    #         break
 
     raise Exception("Not implemented yet")
 
 
 def max_value(board, alpha, beta):
+    if(terminal(board)):
+        return utility(board)
+
+    v=-math.inf
+    for action in actions(board):
+        alpha = max(alpha, v)
+        if alpha >= beta:
+            break
+        v= max(v,min_value(result(board,action),alpha,beta))
+    return v
     """
     Choose the action a in actions(s) that maximizes min - value(result(s, a))
     """
-
-    # alpha = max(alpha, v)
-    #
-    # if alpha >= beta:
-    #     break
 
     raise Exception("Not implemented yet")
 
 
 def ai_play(board):
-    # alpha = -math.inf
-    # beta = math.inf
+    alpha = -math.inf
+    beta = math.inf
 
-    # if ai_mark == PLAYER_X:
-    # val = min_value(result(board, action), alpha, beta)
-    # alpha = max(alpha, val)
+    best_action=None
 
-    # else:
-    # val = max_value(result(board, action), alpha, beta)
-    # beta = min(beta, val)
+    ai_mark = players(board)
+
+    if ai_mark == PLAYER_X:
+        v = -math.inf
+
+        for action in actions(board):
+            val = min_value(result(board, action), alpha, beta)
+            alpha = max(alpha, val)
+            if val > v:
+                v = val
+                best_action = action
+    else:
+        v= math.inf
+        for action in actions(board):
+            val = max_value(result(board, action), alpha, beta)
+            beta = min(beta, val)
+            if val > v:
+                v = val
+                best_action = action
+
+    return best_action
 
     raise Exception("Not implemented yet")
