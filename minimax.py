@@ -9,9 +9,10 @@ def min_value(board):
     if(terminal(board)):
         return utility(board)
     
+    v=math.inf
     for action in actions(board):
-        v= min(math.inf,max_value(result(board,action)))
-        return v
+        v= min(v,max_value(result(board,action)))
+    return v
     """
     Choose the action a in actions(s) that minimizes max - value(result(s, a))
     """
@@ -23,9 +24,10 @@ def max_value(board):
     if(terminal(board)):
         return utility(board)
     
+    v=-math.inf
     for action in actions(board):
-        v= max(-math.inf,min_value(result(board,action)))
-        return v
+        v= max(v,min_value(result(board,action)))
+    return v
     """
     Choose the action a in actions(s) that maximizes min - value(result(s, a))
     """

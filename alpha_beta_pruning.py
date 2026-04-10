@@ -12,10 +12,10 @@ def min_value(board, alpha, beta):
 
     v=math.inf
     for action in actions(board):
+        v= min(v,max_value(result(board,action),alpha,beta))
         beta = min(beta, v)
         if alpha >= beta:
             break
-        v= min(v,max_value(result(board,action),alpha,beta))
     return v
     """
     Choose the action a in actions(s) that minimizes max - value(result(s, a))
@@ -31,10 +31,10 @@ def max_value(board, alpha, beta):
 
     v=-math.inf
     for action in actions(board):
+        v= max(v,min_value(result(board,action),alpha,beta))
         alpha = max(alpha, v)
         if alpha >= beta:
             break
-        v= max(v,min_value(result(board,action),alpha,beta))
     return v
     """
     Choose the action a in actions(s) that maximizes min - value(result(s, a))
@@ -65,7 +65,7 @@ def ai_play(board):
         for action in actions(board):
             val = max_value(result(board, action), alpha, beta)
             beta = min(beta, val)
-            if val > v:
+            if val < v:
                 v = val
                 best_action = action
 

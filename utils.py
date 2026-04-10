@@ -35,8 +35,8 @@ def actions(board):
     moves = []
     for row in range(len(board)): 
         for column in range(len(board[row])):
-            if board[column][row] is None:
-                moves.append((row, column))
+            if board[row][column] is None: 
+                moves.append((column, row)) 
     return moves
 
 def result(board, action):
